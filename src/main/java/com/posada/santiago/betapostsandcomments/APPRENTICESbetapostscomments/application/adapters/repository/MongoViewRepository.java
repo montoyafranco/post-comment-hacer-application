@@ -29,7 +29,7 @@ public class MongoViewRepository implements DomainViewRepository {
     @Override
     public Mono<PostViewModel> findByAggregateId(String aggregateId) {
         /**Make the implementation, using the template, to find a post by its aggregateId*/
-        var query = new Query(Criteria.where("aggregateRootId").is(aggregateId));
+        var query = new Query(Criteria.where("aggregateId").is(aggregateId));
         //
         return template.findOne(query,PostViewModel.class);
     }

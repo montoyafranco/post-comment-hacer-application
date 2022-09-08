@@ -35,11 +35,14 @@ public class QueryHandler {
     @Bean
     public RouterFunction<ServerResponse> getPostById(BringPostById bringPostById){
 
-        return route(GET("/getPost/{postId}"),
+        return route(GET("/getAllPostsId/{postId}"),
                 request-> ServerResponse
                         .ok()
                         .contentType(MediaType.APPLICATION_JSON)
-                        .body(BodyInserters.fromPublisher(bringPostById.getPostById(request.pathVariable("postId")), PostViewModel.class))
+                        .body(
+                                BodyInserters.fromPublisher(
+                                        bringPostById.getPostById
+                                                (request.pathVariable("postId")), PostViewModel.class))
         );
 
 
