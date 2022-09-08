@@ -6,6 +6,7 @@ import com.posada.santiago.betapostsandcomments.APPRENTICESbetapostscomments.bus
 import com.posada.santiago.betapostsandcomments.APPRENTICESbetapostscomments.business.usecases.BringPostById;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.web.reactive.function.BodyInserters;
 import org.springframework.web.reactive.function.server.RouterFunction;
@@ -28,7 +29,7 @@ public class QueryHandler {
                         .contentType(MediaType.APPLICATION_JSON)
                         .body(
                                 BodyInserters.fromPublisher(bringAllPostsUseCase.getPosts(), PostViewModel.class))
-        );
+                        .onErrorResume(throwable -> ServerResponse.status(HttpStatus.NO_CONTENT).build()));
 
     }
 
@@ -43,7 +44,9 @@ public class QueryHandler {
                                 BodyInserters.fromPublisher(
                                         bringPostById.getPostById
                                                 (request.pathVariable("postId")), PostViewModel.class))
-        );
+                        .onErrorResume(throwable -> ServerResponse.status(HttpStatus.NO_CONTENT).build()));
+
+
 
 
     //Create a route that allows you to make a Get Http request that brings you all the posts and also a post by its id
