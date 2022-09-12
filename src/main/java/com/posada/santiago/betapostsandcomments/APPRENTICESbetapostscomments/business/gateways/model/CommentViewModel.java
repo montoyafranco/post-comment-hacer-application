@@ -1,6 +1,8 @@
 package com.posada.santiago.betapostsandcomments.APPRENTICESbetapostscomments.business.gateways.model;
 
-public class CommentViewModel {
+import java.util.List;
+
+public class CommentViewModel  {
     private String id;
     private String postId;
     private String author;
