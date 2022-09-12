@@ -57,7 +57,7 @@ public class MongoViewRepository implements DomainViewRepository {
         //existe un finandmodify en mongo template
         //primero busco el post con su id por el query aggregate es el postid
         // Video ver
-        var query = new Query(Criteria.where("aggregateRootId").is(comment.getPostId()));
+        var query = new Query(Criteria.where("aggregateId").is(comment.getPostId()));
         Update update = new Update();
 
         return template.findOne(query,PostViewModel.class)
